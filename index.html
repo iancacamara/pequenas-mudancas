@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pequenas mudanças, grandes litros — Comunidade</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <!-- HERO -->
+  <header class="max-w-5xl mx-auto p-6">
+    <h1 class="text-3xl font-bold">Pequenas mudanças, grandes litros 💧</h1>
+    <p class="mt-2 text-lg font-semibold text-emerald-700">Cada litro poupado hoje é um rio vivo amanhã.</p>
+    <p class="text-slate-600">Veja quanto dá pra economizar e compartilhe suas mudanças de hábito</p>
+  </header>
+
+  <!-- INTRO/FACTS (DID YOU KNOW) -->
+  <section class="max-w-5xl mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="bg-white p-4 rounded-2xl shadow">
+      <div class="text-sm text-slate-600">Fechar a torneira ao escovar</div>
+      <div class="text-2xl font-semibold">~30 L/dia</div>
+      <div class="text-xs text-slate-500">por pessoa, apenas fechando a torneira ao escovar os dentes.</div>
+    </div>
+    <div class="bg-white p-4 rounded-2xl shadow">
+      <div class="text-sm text-slate-600">Chuveiro eficiente</div>
+      <div class="text-2xl font-semibold">7,6 L/min</div>
+      <div class="text-xs text-slate-500">até ~20% menos que o padrão (≈ 9,5 L/min).</div>
+    </div>
+    <div class="bg-white p-4 rounded-2xl shadow">
+      <div class="text-sm text-slate-600">Vazamentos em casa</div>
+      <div class="text-2xl font-semibold">~38.000 L/ano</div>
+      <div class="text-xs text-slate-500">podem ser desperdiçados; 10% dos lares perdem ≥ 340 L/dia.</div>
+    </div>
+    <p class="col-span-full text-xs text-slate-500">Fontes: EPA WaterSense e UNICEF (valores convertidos para litros).</p>
+  </section>
+
+  <!-- COMO AJUDAR HOJE (SUGESTÕES) -->
+  <section class="max-w-5xl mx-auto p-6">
+    <div class="bg-white p-6 rounded-2xl shadow">
+      <h2 class="text-xl font-semibold mb-2">6 hábitos que mais economizam</h2>
+      <ul class="grid md:grid-cols-2 gap-3 text-sm text-slate-700">
+        <li class="p-3 rounded-xl border">🪥 <b>Copo na escovação</b> — fechar a torneira pode economizar <b>~30 L/dia por pessoa</b> (use um copo).</li>
+        <li class="p-3 rounded-xl border">🚿 <b>Banho −3 min</b> — chuveiro comum ≈ <b>9,5 L/min</b>; cada minuto a menos poupa ~10 L.</li>
+        <li class="p-3 rounded-xl border">💧 <b>Arejadores nas torneiras</b> — bicos/arejadores eficientes limitam a vazão para ~<b>5,7 L/min</b> (padrão costuma ser ~8,3 L/min).</li>
+        <li class="p-3 rounded-xl border">♻️ <b>Reuso da máquina</b> — aproveite <b>~60 L</b> por ciclo para lavar áreas/banheiro.</li>
+        <li class="p-3 rounded-xl border">🧼 <b>Limpeza sem mangueira</b> — prefira vassoura/balde; evite jatos contínuos.</li>
+        <li class="p-3 rounded-xl border">🛠️ <b>Corrigir vazamentos</b> — 10% dos lares perdem <b>≥ 340 L/dia</b> com vazamentos; revise torneiras e caixa acoplada.</li>
+      </ul>
+      <p class="text-xs text-slate-500 mt-2">Observação: números são <b>estimativas</b> para referência e podem variar por residência/equipamento.</p>
+    </div>
+  </section>
+
+  <!-- CALCULADORA DE ECONOMIA -->
+  <section class="max-w-5xl mx-auto p-6">
+    <div class="bg-white p-6 rounded-2xl shadow">
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <h2 class="text-xl font-semibold">Calcule sua economia</h2>
+        <div class="text-sm text-slate-600">Período: <input id="dias" type="number" value="14" min="1" class="w-20 border rounded-lg p-1 text-center"> dias • Pessoas em casa: <input id="pessoas" type="number" value="1" min="1" class="w-16 border rounded-lg p-1 text-center"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mt-4">
+        <!-- Bloco banho/escovação -->
+        <div class="space-y-3">
+          <h3 class="font-semibold">Banho</h3>
+          <div class="grid grid-cols-2 gap-3 text-sm">
+            <label class="block">Vazão do chuveiro (L/min)
+              <input id="chuveiro_lpm" type="number" value="10" min="4" class="w-full border rounded-lg p-2">
+            </label>
+            <label class="block">Banhos por pessoa/dia
+              <input id="banhos_dia" type="number" value="1" min="0" step="0.1" class="w-full border rounded-lg p-2">
+            </label>
+            <label class="block">Redução por banho (min)
+              <input id="reducao_banho_min" type="number" value="3" min="0" step="0.5" class="w-full border rounded-lg p-2">
+            </label>
+          </div>
+
+          <h3 class="font-semibold mt-4">Escovação com copo</h3>
+          <div class="grid grid-cols-2 gap-3 text-sm">
+            <label class="block">Vazão torneira (L/min)
+              <input id="torneira_lpm" type="number" value="10" min="2" class="w-full border rounded-lg p-2">
+            </label>
+            <label class="block">Tempo torneira aberta (min)
+              <input id="tempo_escov" type="number" value="2" min="0" step="0.5" class="w-full border rounded-lg p-2">
+            </label>
+            <label class="block">Escovações por pessoa/dia
+              <input id="escovacoes_dia" type="number" value="3" min="0" step="1" class="w-full border rounded-lg p-2">
+            </label>
+            <label class="block">Volume do copo (L)
+              <input id="copo_l" type="number" value="0.2" min="0" step="0.1" class="w-full border rounded-lg p-2">
+            </label>
+          </div>
+        </div>
+
+        <!-- Bloco reuso/limpeza/vazamento -->
+        <div class="space-y-3">
+          <h3 class="font-semibold">Reuso e limpeza</h3>
+          <div class="grid grid-cols-2 gap-3 text-sm">
+            <label class="block">Reuso máquina (L/ciclo)
+              <input id="reuso_lpc" type="number" value="60" min="0" class="w-full border rounded-lg p-2">
+            </label>
+            <label class="block">Ciclos por semana
+              <input id="reuso_ciclos" type="number" value="3" min="0" step="1" class="w-full border rounded-lg p-2">
+            </label>
+            <label class="block">Limpezas sem mangueira/semana
+              <input id="limpeza_semana" type="number" value="2" min="0" step="1" class="w-full border rounded-lg p-2">
+            </label>
+            <label class="block">Economia por limpeza (L)
+              <input id="limpeza_l" type="number" value="50" min="0" class="w-full border rounded-lg p-2">
+            </label>
+          </div>
+
+          <h3 class="font-semibold mt-4">Vazamentos corrigidos</h3>
+          <div class="grid grid-cols-2 gap-3 text-sm">
+            <label class="block">Qtd. de vazamentos
+              <input id="vazamentos" type="number" value="0" min="0" step="1" class="w-full border rounded-lg p-2">
+            </label>
+            <label class="block">Economia por vazamento/dia (L)
+              <input id="vaz_l_dia" type="number" value="200" min="0" step="10" class="w-full border rounded-lg p-2">
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 grid md:grid-cols-3 gap-4 text-sm">
+        <label class="block">Tarifa de água (R$/m³)
+          <input id="tarifa" type="number" value="6" step="0.1" min="0" class="w-full border rounded-lg p-2">
+        </label>
+        <div class="bg-slate-50 rounded-xl p-3 border"><div class="text-slate-500">Total estimado (L)</div><div id="out_total_l" class="text-2xl font-semibold">0</div></div>
+        <div class="bg-slate-50 rounded-xl p-3 border"><div class="text-slate-500">Economia (R$)</div><div id="out_total_r$" class="text-2xl font-semibold">0,00</div></div>
+      </div>
+
+      <div class="mt-4">
+        <table class="w-full text-sm">
+          <thead class="text-slate-500">
+            <tr><th class="text-left py-2">Ação</th><th class="text-right">Litros no período</th></tr>
+          </thead>
+          <tbody id="breakdown"></tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-500 mt-2">Dica: ajuste os campos com a sua realidade. Os cálculos usam aproximações comuns: chuveiro ~10 L/min; torneira ~10 L/min; reuso da máquina ~60 L/ciclo; limpeza sem mangueira ~50 L/sessão.</p>
+
+      <div class="mt-6 flex items-center justify-between flex-wrap gap-3">
+        <p class="text-slate-700">Topa viver isso por <b id="diasLabel">14</b> dias? 🚀</p>
+        <a href="#commentForm" class="px-4 py-3 rounded-xl bg-emerald-600 text-white font-medium hover:bg-emerald-700">Quero me comprometer e comentar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- META COMUNITÁRIA -->
+  <section class="max-w-5xl mx-auto px-6">
+    <div class="bg-white p-6 rounded-2xl shadow">
+      <div class="flex items-center justify-between gap-4 flex-wrap">
+        <div>
+          <h2 class="text-xl font-semibold">Meta comunitária</h2>
+          <p class="text-slate-600">Chegar a <b id="goalLitersLabel">1.000.000 L</b> economizados juntos.</p>
+        </div>
+        <div class="text-right">
+          <div class="text-2xl font-bold" id="communityLiters">0 L</div>
+          <div class="text-xs text-slate-500">soma dos relatos aprovados</div>
+        </div>
+      </div>
+      <div class="w-full h-3 bg-slate-200 rounded-full mt-3">
+        <div id="communityBar" class="h-3 bg-emerald-500 rounded-full" style="width:0%"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RANKING DA COMUNIDADE -->
+  <section class="max-w-5xl mx-auto p-6">
+    <div class="bg-white p-6 rounded-2xl shadow">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-semibold">Ranking — Top 10</h3>
+        <div class="text-xs text-slate-500">Regras: +10 pts por comentário • +5 pts por foto • +1 pt a cada 10 L</div>
+      </div>
+      <table class="w-full mt-3 text-sm">
+        <thead class="text-left text-slate-500">
+          <tr>
+            <th class="py-2">#</th>
+            <th>Nome</th>
+            <th>Pontos</th>
+            <th>Litros</th>
+            <th>Comentários</th>
+            <th>Fotos</th>
+          </tr>
+        </thead>
+        <tbody id="lbBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FORM + FEED -->
+  <main class="max-w-5xl mx-auto p-6 grid lg:grid-cols-2 gap-6">
+    <!-- FORMULÁRIO DE COMENTÁRIOS -->
+    <form id="commentForm" class="bg-white p-6 rounded-2xl shadow space-y-4" enctype="multipart/form-data">
+      <h3 class="text-lg font-semibold">Conte sua mudança</h3>
+      <p class="text-sm text-slate-600">O que você mudou no dia a dia para economizar água? (ex.: copo na escovação, banho mais curto, reuso da máquina…)</p>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        <input name="name" placeholder="Seu nome" required class="border rounded-xl p-3"/>
+        <input name="city" placeholder="Cidade/UF (opcional)" class="border rounded-xl p-3"/>
+      </div>
+      <textarea name="message" rows="5" placeholder="Escreva seu comentário…" required class="border rounded-xl p-3 w-full"></textarea>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        <input type="number" step="0.1" name="liters" placeholder="Litros economizados (opcional)" class="border rounded-xl p-3"/>
+        <input type="file" name="photo" accept="image/*" class="mt-1" />
+      </div>
+
+      <div class="flex items-center justify-between">
+        <label class="text-sm text-slate-600 flex items-center gap-2">
+          <input type="checkbox" id="terms" class="accent-emerald-600" required>
+          <span>Autorizo a exibição pública do meu comentário.</span>
+        </label>
+        <button id="sendBtn" class="px-4 py-3 rounded-xl bg-emerald-600 text-white font-medium hover:bg-emerald-700">Publicar</button>
+      </div>
+      <p id="msg" class="text-sm"></p>
+    </form>
+
+    <!-- FEED DE COMENTÁRIOS -->
+    <section class="bg-white p-6 rounded-2xl shadow">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-semibold">Relatos da comunidade</h3>
+        <button id="refreshBtn" class="text-sm text-emerald-700">Atualizar</button>
+      </div>
+      <ul id="feed" class="mt-4 space-y-4"></ul>
+      <div class="mt-4 text-center">
+        <button id="loadMore" class="text-sm px-4 py-2 border rounded-xl">Carregar mais</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="max-w-5xl mx-auto p-6 text-xs text-slate-500">
+    *Relatos passam por moderação quando necessário. Este projeto é comunitário/educacional.
+  </footer>
+
+  <!-- SUPABASE + LÓGICA -->
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    // ====== CONFIGURE AQUI ======
+    const SUPABASE_URL = 'https://sqwxasfmwiurqxptfuxw.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_aZjoi0SFRu3JFD5V4M_FMw_yMQ0EK69';
+    const BUCKET = 'proofs';             // crie este bucket como PUBLIC no Storage
+    const GOAL_LITERS = 1000000;         // meta comunitária
+    // =============================
+
+    // ====== CALCULADORA ======
+    const ids = (id)=> document.getElementById(id);
+    const fields = ['dias','pessoas','chuveiro_lpm','banhos_dia','reducao_banho_min','torneira_lpm','tempo_escov','escovacoes_dia','copo_l','reuso_lpc','reuso_ciclos','limpeza_semana','limpeza_l','vazamentos','vaz_l_dia','tarifa'];
+    fields.forEach(f=> ids(f) && ids(f).addEventListener('input', recalc));
+
+    function n(v){ const x = Number(v); return isNaN(x)?0:x; }
+
+    function recalc(){
+      const dias = n(ids('dias').value||14);
+      const pessoas = n(ids('pessoas').value||1);
+      ids('diasLabel').textContent = dias;
+
+      // banho
+      const LpmChu = n(ids('chuveiro_lpm').value||10);
+      const banhosDia = n(ids('banhos_dia').value||1);
+      const redMin = n(ids('reducao_banho_min').value||0);
+      const L_banho = Math.max(0, pessoas*banhosDia*redMin*LpmChu*dias);
+
+      // escovação com copo
+      const LpmTor = n(ids('torneira_lpm').value||10);
+      const tEscov = n(ids('tempo_escov').value||2);
+      const escovDia = n(ids('escovacoes_dia').value||3);
+      const copoL = n(ids('copo_l').value||0.2);
+      const unit = Math.max(0, LpmTor*tEscov - copoL);
+      const L_escov = Math.max(0, pessoas*escovDia*unit*dias);
+
+      // reuso máquina
+      const Lpc = n(ids('reuso_lpc').value||60);
+      const ciclosSem = n(ids('reuso_ciclos').value||3);
+      const L_reuso = Math.max(0, Lpc*ciclosSem*(dias/7));
+
+      // limpeza sem mangueira
+      const limpSem = n(ids('limpeza_semana').value||2);
+      const limpL = n(ids('limpeza_l').value||50);
+      const L_limpeza = Math.max(0, limpSem*limpL*(dias/7));
+
+      // vazamentos corrigidos
+      const vazQ = n(ids('vazamentos').value||0);
+      const vazDia = n(ids('vaz_l_dia').value||200);
+      const L_vaz = Math.max(0, vazQ*vazDia*dias);
+
+      const total = L_banho + L_escov + L_reuso + L_limpeza + L_vaz;
+      ids('out_total_l').textContent = Math.round(total).toLocaleString('pt-BR');
+      const tarifa = n(ids('tarifa').value||6);
+      const reais = (total/1000)*tarifa;
+      ids('out_total_r$').textContent = reais.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
+
+      const rows = [
+        ['Banho (−min)', L_banho],
+        ['Escovação (c/ copo)', L_escov],
+        ['Reuso da máquina', L_reuso],
+        ['Limpeza s/ mangueira', L_limpeza],
+        ['Vazamentos corrigidos', L_vaz],
+      ];
+      const tbody = document.getElementById('breakdown');
+      tbody.innerHTML = '';
+      rows.forEach(([k,v])=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td class='py-2'>${k}</td><td class='text-right'>${Math.round(v).toLocaleString('pt-BR')} L</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    recalc();
+
+    // ====== COMUNIDADE (SUPABASE) ======
+    document.getElementById('goalLitersLabel').textContent = GOAL_LITERS.toLocaleString('pt-BR') + ' L';
+
+    const supa = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // debug opcional: digite supa no console
+    window.supa = supa;
+    const pageSize = 8;
+    let page = 0;
+
+    const form = document.getElementById('commentForm');
+    const msgEl = document.getElementById('msg');
+    const btn = document.getElementById('sendBtn');
+
+    function timeAgo(d){
+      const s = Math.floor((Date.now()-new Date(d).getTime())/1000);
+      const t = s<60? [s,'s'] : s<3600? [Math.floor(s/60),'min'] : s<86400? [Math.floor(s/3600),'h'] : [Math.floor(s/86400),'d'];
+      return `${t[0]} ${t[1]}`;
+    }
+
+    async function uploadPhoto(file){
+      if(!file || !file.size) return '';
+      const path = `comments/${Date.now()}_${Math.random().toString(36).slice(2)}_${file.name}`;
+      const { data, error } = await supa.storage.from(BUCKET).upload(path, file, { upsert: false });
+      if(error) throw error;
+      return supa.storage.from(BUCKET).getPublicUrl(data.path).data.publicUrl;
+    }
+
+    async function insertComment(payload){
+      const { error } = await supa.from('comments').insert(payload);
+      if(error) throw error;
+    }
+
+    function commentCard(r){
+      const liters = r.liters ? `<span class='text-emerald-700 font-medium'>${Number(r.liters).toLocaleString('pt-BR')} L</span>` : '';
+      const photo = r.photo_url ? `<img src='${r.photo_url}' alt='' class='w-20 h-20 object-cover rounded-lg border'/>` : '';
+      return `
+        <li class='border rounded-2xl p-4'>
+          <div class='flex items-start gap-4'>
+            ${photo}
+            <div class='flex-1'>
+              <div class='flex items-center justify-between'>
+                <div class='font-semibold'>${r.name || 'Anônimo'} <span class='text-slate-500 font-normal'>${r.city? '• '+r.city:''}</span></div>
+                <div class='text-xs text-slate-500'>${timeAgo(r.created_at)} atrás</div>
+              </div>
+              <p class='mt-1 whitespace-pre-wrap'>${r.message}</p>
+              ${liters? `<div class='mt-2 text-xs text-slate-600'>Economia relatada: ${liters}</div>`: ''}
+            </div>
+          </div>
+        </li>`;
+    }
+
+    async function loadTotals(){
+      // Busca até 1000 últimos para somar (simples). Para grande volume, crie uma view agregada.
+      const { data, error } = await supa.from('comments')
+        .select('liters')
+        .eq('approved', true)
+        .order('created_at', { ascending: false })
+        .limit(1000);
+      if(error) { console.warn(error); return; }
+      const total = (data||[]).reduce((a,r)=> a + (Number(r.liters)||0), 0);
+      document.getElementById('communityLiters').textContent = Math.round(total).toLocaleString('pt-BR') + ' L';
+      const pct = Math.min(100, (total/GOAL_LITERS)*100);
+      document.getElementById('communityBar').style.width = pct.toFixed(1) + '%';
+    }
+
+    async function loadFeed({append=false}={}){
+      const from = page*pageSize;
+      const to = from + pageSize - 1;
+      const { data, error } = await supa.from('comments')
+        .select('id,name,city,message,liters,photo_url,created_at,approved')
+        .eq('approved', true)
+        .order('created_at', { ascending: false })
+        .range(from, to);
+      if(error) { console.error(error); return; }
+      const ul = document.getElementById('feed');
+      if(!append) ul.innerHTML = '';
+      (data||[]).forEach(r=> ul.insertAdjacentHTML('beforeend', commentCard(r)));
+      document.getElementById('loadMore').style.display = (data && data.length === pageSize) ? 'inline-block' : 'none';
+      await loadTotals();
+      await loadLeaderboard();
+    }
+
+    // ====== LEADERBOARD ======
+    const SCORING = { PER_COMMENT: 10, PHOTO_BONUS: 5, POINT_PER_LITER: 1/10 }; // 1 ponto a cada 10 L
+
+    function crown(idx){ return idx===0?'👑': idx===1?'🥈': idx===2?'🥉':''; }
+
+    async function loadLeaderboard(){
+      const { data, error } = await supa.from('comments')
+        .select('name, liters, photo_url')
+        .eq('approved', true)
+        .order('created_at', { ascending: false })
+        .limit(1000);
+      if(error){ console.warn(error); return; }
+      const map = new Map();
+      (data||[]).forEach(r=>{
+        const key = (r.name||'Anônimo').trim().toLowerCase();
+        if(!map.has(key)) map.set(key,{ name: r.name||'Anônimo', liters:0, comments:0, photos:0, points:0 });
+        const it = map.get(key);
+        const L = Number(r.liters)||0;
+        const hasPhoto = !!r.photo_url;
+        it.comments += 1;
+        it.photos += hasPhoto ? 1 : 0;
+        it.liters += L;
+        it.points += SCORING.PER_COMMENT + (hasPhoto? SCORING.PHOTO_BONUS:0) + Math.floor(L * SCORING.POINT_PER_LITER);
+      });
+      const rows = Array.from(map.values()).sort((a,b)=> b.points - a.points || b.liters - a.liters).slice(0,10);
+      const tb = document.getElementById('lbBody');
+      tb.innerHTML = '';
+      rows.forEach((r,i)=>{
+        const tr = document.createElement('tr');
+        const medal = crown(i);
+        tr.innerHTML = `
+          <td class='py-2'>${i+1} ${medal}</td>
+          <td>${r.name}</td>
+          <td class='font-semibold'>${r.points}</td>
+          <td>${Math.round(r.liters).toLocaleString('pt-BR')} L</td>
+          <td>${r.comments}</td>
+          <td>${r.photos}</td>`;
+        tb.appendChild(tr);
+      });
+    }
+
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault(); msgEl.textContent=''; btn.disabled = true; btn.textContent='Publicando…';
+      try{
+        const fd = new FormData(form);
+        const photo = fd.get('photo');
+        const photo_url = await uploadPhoto(photo);
+        const payload = {
+          name: fd.get('name'),
+          city: fd.get('city') || null,
+          message: fd.get('message'),
+          liters: fd.get('liters') ? Number(fd.get('liters')) : null,
+          photo_url,
+          approved: true
+        };
+        await insertComment(payload);
+        msgEl.textContent = 'Publicado! Obrigado por compartilhar.';
+        form.reset();
+        page = 0; // volta para o topo
+        await loadFeed({append:false});
+        await loadLeaderboard();
+      } catch(err){
+        console.error(err);
+        msgEl.textContent = 'Erro ao publicar: ' + (err.message || err);
+      } finally {
+        btn.disabled = false; btn.textContent = 'Publicar';
+      }
+    });
+
+    document.getElementById('refreshBtn').addEventListener('click', async ()=>{ page=0; await loadFeed({append:false}); await loadLeaderboard(); });
+    document.getElementById('loadMore').addEventListener('click', async ()=>{ page++; await loadFeed({append:true});});
+
+    // boot
+    loadFeed();
+    loadLeaderboard();
+  </script>
+</body>
+</html>
